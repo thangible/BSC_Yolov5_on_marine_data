@@ -31,7 +31,7 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         for img_path in img_paths:
             img = imread(img_path)        
             #MASK
-            image_name = img.stem
+            image_name = img_paths.stem
             mask_path = get_mask_path(image_name, maskdir)
             mask = imread(mask_path)
             #AUGMENTATION
