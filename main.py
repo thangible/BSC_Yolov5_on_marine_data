@@ -28,6 +28,7 @@ aug_dict['ToGray'] = ToGray
 aug_dict['ToSepia'] = ToSepia
 aug_dict['GaussNoise'] = GaussNoise
 
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 500 --run_name baseline')
 for run_name in aug_dict.keys():
     augmentation = aug_dict[run_name]
     create_augmented_images(augmentation = CenterCrop, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO)
