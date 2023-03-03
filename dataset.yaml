@@ -1,5 +1,5 @@
-train: ../yolov5_dataset/images/train 
-val: ../yolov5_dataset/images/test 
+train: ../augmented_yolov5_dataset/images/train 
+val: ../augmented_yolov5_dataset/images/test 
 
 # Classes
 names:
