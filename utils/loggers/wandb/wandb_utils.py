@@ -42,7 +42,7 @@ class WandbLogger():
     https://docs.wandb.com/guides/integrations/yolov5
     """
 
-    def __init__(self, opt, run_id=None, job_type='Training'):
+    def __init__(self, opt, run_id=None, job_type='Training', job_name=None):
         """
         - Initialize WandbLogger instance
         - Upload dataset if opt.upload_dataset is True
@@ -80,6 +80,8 @@ class WandbLogger():
                     # and they will have stored the already processed dict in opt.data
                     self.data_dict = opt.data
                 self.setup_training(opt)
+                
+        self.wandb.run.name = opt.run_name
 
     def setup_training(self, opt):
         """
