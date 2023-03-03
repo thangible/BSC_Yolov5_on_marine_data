@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn import preprocessing
 import numpy as np
 
-def create_augmented_images(augmentation, olddir, newdir, name, maskdir, data_info_path):
+def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_path):
     #create an empty director of new path with image/ train and image/test
     newtrain = pathlib.Path(newdir,'images', 'train')
     newtest = pathlib.Path(newdir, 'images', 'train')
