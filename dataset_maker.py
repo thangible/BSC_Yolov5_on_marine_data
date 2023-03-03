@@ -46,10 +46,9 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
             #NEW DIR
             img_newpath = pathlib.Path(newdir, 'images', image_name + '.jpg')
             mask_newpath = pathlib.Path(maskdir, 'labels', image_name + '.txt')
-            augmented_img.imwrite()
             #save file
             np.savetxt(mask_newpath, bbox, fmt='%d %.5f %.5f %.5f %.5f')
-            augmented_img.imwrite(img_newpath)
+            cv2.imwrite(img_newpath, augmented_img)
         
         
 def get_label(data_info, name):
