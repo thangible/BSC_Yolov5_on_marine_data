@@ -15,8 +15,14 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
     newtest_img = pathlib.Path(newdir, 'images', 'test')
     newtrain_label = pathlib.Path(newdir, 'labels', 'train')
     newtest_label = pathlib.Path(newdir, 'labels', 'test')
+    for path in [newtrain_img, newtrain_label, newtest_img, newtest_label]:
+        path.mkdir(parents=True, exist_ok=True)
     odltrain = pathlib.Path(olddir,'images', 'train')
     oldtest = pathlib.Path(olddir, 'images', 'test')
+    
+    
+
+
     #read all images as files names into a varaible
     org_testimages = list(oldtest.glob('*.jpg')) 
     org_trainimages = list(odltrain.glob('*.jpg')) 
