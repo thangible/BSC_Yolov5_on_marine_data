@@ -50,7 +50,8 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         coords  = get_bbox(augmented_mask)
         cat_label = get_label(data_info, img_path.name)
         label = le.transform([cat_label])[0]
-        bbox = [np.insert(coord,0, label) for coord in coords]
+        bbox = [np.insert(coord,0, int(label)) for coord in coords]
+        print(bbox)
         #NEW DIR
         img_newpath = pathlib.Path(newtrain_img, image_name + '.jpg')
         label_newpath = pathlib.Path(newtrain_label, image_name + '.txt')
