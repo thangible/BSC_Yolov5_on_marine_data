@@ -8,6 +8,7 @@ import pandas as pd
 from sklearn import preprocessing
 import numpy as np
 import cv2
+from tqdm import tqdm
 
 def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_path):
     #create an empty director of new path with image/ train and image/test
@@ -36,7 +37,7 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
     le_name_mapping = dict(zip(le.classes_, le.transform(le.classes_)))
     data_info['label'] = le.transform(label)
     #AUGMENT FOR TRAIN SET
-    for img_path in org_trainimages:
+    for img_path in tqdm(org_trainimages, total=len(org_trainimages)):
         img = imread(img_path)        
         #MASK
         image_name = img_path.stem
@@ -61,7 +62,7 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
             np.savetxt(label_newpath, bbox)       
         cv2.imwrite(str(img_newpath), augmented_img)
         
-    for img_path in org_testimages:
+    for img_path in  tqdm(org_testimages, total=len(org_testimages)) :
         img = imread(img_path)        
         #MASK
         image_name = img_path.stem
