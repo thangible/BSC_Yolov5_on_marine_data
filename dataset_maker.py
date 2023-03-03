@@ -110,7 +110,7 @@ def get_bbox(mask):
             h = h / height
             w = x2 - x1
             w = w / width
-            seg = [x,y,h,w]
+            seg = [x,y,w,h]
             output.append(seg)
     return output
 
