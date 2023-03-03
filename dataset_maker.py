@@ -55,7 +55,10 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         img_newpath = pathlib.Path(newtrain_img, image_name + '.jpg')
         label_newpath = pathlib.Path(newtrain_label, image_name + '.txt')
         #save file
-        np.savetxt(label_newpath, bbox, fmt='%d %.5f %.5f %.5f %.5f')
+        if bbox:
+            np.savetxt(label_newpath, bbox, fmt='%d %.5f %.5f %.5f %.5f')
+        else:
+            np.savetxt(label_newpath, bbox)       
         cv2.imwrite(str(img_newpath), augmented_img)
         
     for img_path in org_testimages:
