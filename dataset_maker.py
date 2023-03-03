@@ -84,7 +84,7 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
             np.savetxt(label_newpath, bbox, fmt='%d %.5f %.5f %.5f %.5f')
         else:
             np.savetxt(label_newpath, bbox)
-        cv2.imwrite(img_newpath, augmented_img)
+        cv2.imwrite(str(img_newpath), augmented_img)
         
         
 def get_label(data_info, name):
