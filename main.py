@@ -1,8 +1,6 @@
 import os
-from dataset_maker import *
+from dataset_maker import create_augmented_images
 import albumentations as A
-
-
 
 NEWDIR = "../augmented_yolov5_dataset/"
 OLDDIR = "../yolov5_dataset"
