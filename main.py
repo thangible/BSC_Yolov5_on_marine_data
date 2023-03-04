@@ -17,15 +17,15 @@ ToGray = A.ToGray(p=1)
 ToSepia = A.ToSepia(p=1)
 GaussNoise = A.GaussNoise(p =1)
 
+#BATCH2
+MotionBlur =  A.MotionBlur(blur_limit =31,  p=1.0)
+Normalize = A.Normalize(mean = (0.184, 1.289, 0.661), std = (0.708, 0.338, 0.177), p = 1.0)
+
 
 aug_dict = {}
-aug_dict['CenterCrop_1_of_5'] = CenterCrop_2
-aug_dict['GridDropout'] = GridDropout
-aug_dict['CLAHE'] = CLAHE
-aug_dict['Sharpen'] = Sharpen
-aug_dict['ToGray'] = ToGray
-aug_dict['ToSepia'] = ToSepia
-aug_dict['GaussNoise'] = GaussNoise
+aug_dict['MotionBlur'] = MotionBlur
+aug_dict['Normalize'] = Normalize
+
 
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 500 --run_name baseline')
 for run_name in aug_dict.keys():
