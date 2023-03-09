@@ -30,21 +30,25 @@ Cutout = A.CoarseDropout(max_holes=1, p =1, max_height=50, max_width=50)
 
 
 aug_dict = {}
-aug_dict['CenterCrop_2_of_5'] = CenterCrop
-aug_dict['CenterCrop_1_of_5'] = CenterCrop_2
-aug_dict['Rotation'] = Rotation
-aug_dict['Flip'] = Flip
-#COLOR
-aug_dict['CLAHE'] = CLAHE
-aug_dict['Sharpen'] = Sharpen
-aug_dict['ChannelShuffle'] = ChannelShuffle
-aug_dict['ToGray'] = ToGray
-aug_dict['ToSepia'] = ToSepia
-aug_dict['GaussNoise'] = GaussNoise
-aug_dict['Normalize'] = Normalize
-#Cutout
-aug_dict['GridDropout'] = GridDropout
-aug_dict['Cutout'] = Cutout
+# aug_dict['CenterCrop_2_of_5'] = CenterCrop
+# aug_dict['CenterCrop_1_of_5'] = CenterCrop_2
+# aug_dict['Rotation'] = Rotation
+# aug_dict['Flip'] = Flip
+# #COLOR
+# aug_dict['CLAHE'] = CLAHE
+# aug_dict['Sharpen'] = Sharpen
+# aug_dict['ChannelShuffle'] = ChannelShuffle
+# aug_dict['ToGray'] = ToGray
+# aug_dict['ToSepia'] = ToSepia
+# aug_dict['GaussNoise'] = GaussNoise
+# aug_dict['Normalize'] = Normalize
+# #Cutout
+# aug_dict['GridDropout'] = GridDropout
+# aug_dict['Cutout'] = Cutout
+
+aug_dict['MotionBlur'] = A.MotionBlur(blur_limit = 11, p = 1.0)
+aug_dict['Perspective'] = A.Perspective(scale = 0.3, p = 1.0)
+aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
 
 
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 500 --run_name baseline')
