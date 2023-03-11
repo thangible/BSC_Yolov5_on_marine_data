@@ -96,23 +96,23 @@ def get_mask_path(image_name, maskdir):
     return mask_path
 
 def get_bbox(mask): 
-    output = []
+    output = set()
     for prop in regionprops(skinmage_label(mask)):
-            width = mask.shape[1]
-            height = mask.shape[0]
+            width = 500
+            height = 500
             x1, y1 = prop.bbox[1], prop.bbox[0]
             x2, y2 = prop.bbox[4],prop.bbox[3]
             x = (x1 + x2)//2
             x = x / width
-            y = (x1 + x2)//2
+            y = (y1 + y2)//2
             y = y / height
-            h = y2 - y1
+            h = abs(y2 - y1)
             h = h / height
-            w = x2 - x1
+            w = abs(x2 - x1)
             w = w / width
-            seg = [x,y,w,h]
-            output.append(seg)
-    return output
+            seg = (x,y,w,h)
+            output.add(seg)
+    return list(output)
 
 def read_data_info(data_info_path):
     data = pd.read_csv(data_info_path, index_col=False)
