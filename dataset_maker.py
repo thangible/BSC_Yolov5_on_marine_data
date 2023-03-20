@@ -10,7 +10,7 @@ import numpy as np
 import cv2
 from tqdm import tqdm
 
-def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_path):
+def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_path, is_normalize = False):
     #create an empty director of new path with image/ train and image/test
     newtrain_img = pathlib.Path(newdir,'images', 'train')
     newtest_img = pathlib.Path(newdir, 'images', 'test')
@@ -71,6 +71,9 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         augmented = augmentation(image = img, mask = mask)
         augmented_mask = augmented['mask']
         augmented_img = augmented['image']
+        if is_normalize:
+            augmented_mask = np.round(augmented_mask*255)
+            augmented_img = np.round(augmented_img*255)
         #Process mask
         coords  = get_bbox(augmented_mask)
         cat_label = get_label(data_info, img_path.name)

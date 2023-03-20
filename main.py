@@ -34,7 +34,7 @@ aug_dict = {}
 # # aug_dict['CenterCrop_2_of_5'] = CenterCrop
 # # aug_dict['CenterCrop_1_of_5'] = CenterCrop_2
 # aug_dict['Rotation'] = Rotation
-aug_dict['Flip'] = Flip
+# aug_dict['Flip'] = Flip
 # #COLOR
 # aug_dict['CLAHE'] = CLAHE
 # aug_dict['Sharpen'] = Sharpen
@@ -42,7 +42,7 @@ aug_dict['Flip'] = Flip
 # aug_dict['ToGray'] = ToGray
 # aug_dict['ToSepia'] = ToSepia
 # aug_dict['GaussNoise'] = GaussNoise
-# aug_dict['Normalize'] = Normalize
+aug_dict['Normalize'] = Normalize
 # #Cutout
 # aug_dict['GridDropout'] = GridDropout
 # aug_dict['Cutout'] = Cutout
@@ -52,7 +52,7 @@ aug_dict['Flip'] = Flip
 # aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
 
 
-os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e3')
+# os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e3')
 # time.sleep(30)
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e4.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e4')
 # time.sleep(30)
@@ -63,6 +63,6 @@ os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml --weig
 
 for run_name in aug_dict.keys():
     augmentation = aug_dict[run_name]
-    create_augmented_images(augmentation = augmentation, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO)
+    create_augmented_images(augmentation = augmentation, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
     os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 500 --run_name {}'.format(run_name))
     # time.sleep(60)
