@@ -52,8 +52,8 @@ aug_dict['Normalize'] = Normalize
 # aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
 
 
-# os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e3')
-# time.sleep(30)
+os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml  --cache --epochs 100 --run_name hp_lr_e3')
+time.sleep(30)
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e4.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e4')
 # time.sleep(30)
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e5.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e5')
