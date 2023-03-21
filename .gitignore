@@ -22,7 +22,7 @@
 *.cfg
 !setup.cfg
 !cfg/yolov3*.cfg
-
+/yolo
 storage.googleapis.com
 runs/*
 data/*
@@ -36,6 +36,7 @@ data/images/*
 !data/*.sh
 
 results*.csv
+
 
 # Datasets -------------------------------------------------------------------------------------------------------------
 coco/
