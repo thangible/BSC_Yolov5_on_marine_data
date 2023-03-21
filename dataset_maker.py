@@ -104,8 +104,7 @@ def get_mask_path(image_name, maskdir):
 def get_bbox(mask): 
     output = set()
     for prop in regionprops(skinmage_label(mask)):
-            width = 500
-            height = 500
+            height, width = mask.shape[:2]
             x1, y1 = prop.bbox[1], prop.bbox[0]
             x2, y2 = prop.bbox[4],prop.bbox[3]
             x = (x1 + x2)//2
