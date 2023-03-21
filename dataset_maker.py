@@ -46,6 +46,9 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         augmented = augmentation(image = img, mask = mask)
         augmented_mask = augmented['mask']
         augmented_img = augmented['image']
+        if is_normalize:
+            augmented_mask = np.round(augmented_mask*0.5+127.5)
+            augmented_img = np.round(augmented_img*0.5*127.5)
         #Process mask
         coords  = get_bbox(augmented_mask)
         cat_label = get_label(data_info, img_path.name)
@@ -72,8 +75,8 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         augmented_mask = augmented['mask']
         augmented_img = augmented['image']
         if is_normalize:
-            augmented_mask = np.round(augmented_mask+127.5)
-            augmented_img = np.round(augmented_img*127.5)
+            augmented_mask = np.round(augmented_mask*0.5+127.5)
+            augmented_img = np.round(augmented_img*0.5*127.5)
         #Process mask
         coords  = get_bbox(augmented_mask)
         cat_label = get_label(data_info, img_path.name)

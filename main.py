@@ -62,8 +62,9 @@ aug_dict['Flip'] = Flip
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e6.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e6')
 
 
-for run_name in aug_dict.keys():
-    augmentation = aug_dict[run_name]
-    create_augmented_images(augmentation = augmentation, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
-    os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 500 --run_name {}'.format(run_name))
-    # time.sleep(60)
+create_augmented_images(augmentation = Normalize, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Normalize'))
+time.sleep(60)
+create_augmented_images(augmentation = Flip, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = False)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Flip'))
+time.sleep(60)
