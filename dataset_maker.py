@@ -62,9 +62,7 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         cv2.imwrite(str(img_newpath), augmented_img)
         
     for img_path in  tqdm(org_testimages, total=len(org_testimages)) :
-        img = imread(img_path)
-        if is_normalize:
-            img = img/255        
+        img = imread(img_path)     
         #MASK
         image_name = img_path.stem
         mask_path = get_mask_path(image_name, maskdir)
@@ -74,8 +72,8 @@ def create_augmented_images(augmentation, olddir, newdir, maskdir, data_info_pat
         augmented_mask = augmented['mask']
         augmented_img = augmented['image']
         if is_normalize:
-            augmented_mask = np.round(augmented_mask*255)
-            augmented_img = np.round(augmented_img*255)
+            augmented_mask = np.round(augmented_mask+127.5)
+            augmented_img = np.round(augmented_img*127.5)
         #Process mask
         coords  = get_bbox(augmented_mask)
         cat_label = get_label(data_info, img_path.name)
