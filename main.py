@@ -51,7 +51,7 @@ aug_dict['Flip'] = Flip
 # aug_dict['MotionBlur'] = A.MotionBlur(blur_limit = 11, p = 1.0)
 # aug_dict['Perspective'] = A.Perspective(scale = 0.3, p = 1.0)
 # aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
-
+Perspective =  A.Perspective(scale = 0.3, p = 1.0)
 
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml  --cache --epochs 100 --run_name hp_lr_e3')
 # time.sleep(30)
@@ -67,4 +67,7 @@ os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights 
 time.sleep(60)
 create_augmented_images(augmentation = Flip, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = False)
 os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Flip'))
+time.sleep(60)
+create_augmented_images(augmentation = Perspective, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = False)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Perspective'))
 time.sleep(60)
