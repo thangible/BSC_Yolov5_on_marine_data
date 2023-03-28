@@ -52,7 +52,7 @@ MotionBlur = A.MotionBlur(blur_limit = 21, p = 1.0)
 # aug_dict['Perspective'] = A.Perspective(scale = 0.3, p = 1.0)
 # aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
 def Rand_HP(n):
-        def RandAugment(image, n = n, m = 10):
+        def RandAugment(image, mask, n = n, m = 10):
         # Define a set of possible image transformations
             transforms_list = [Rotation, 
                             Flip,
