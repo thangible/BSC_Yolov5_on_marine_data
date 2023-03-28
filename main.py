@@ -66,8 +66,10 @@ def Rand_HP(n):
             # Apply a random sequence of n transformations with magnitude m
             aug = A.Compose([transforms_list[i] for i in np.random.choice(len(transforms_list), n)])
             aug_image = aug(image = image.astype(np.uint8))['image']
+            aug_mask = aug(image = image.astype(np.uint8))['mask']
             output = {}
             output['image'] = aug_image
+            output['mask'] = aug_mask
             #FOR VISUALISATION
             output['augs'] = [str(x).partition('(')[0] for x in aug]
             return output
