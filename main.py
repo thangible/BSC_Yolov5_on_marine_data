@@ -48,12 +48,33 @@ aug_dict['Flip'] = Flip
 # aug_dict['GridDropout'] = GridDropout
 # aug_dict['Cutout'] = Cutout
 
-# aug_dict['MotionBlur'] = A.MotionBlur(blur_limit = 11, p = 1.0)
+MotionBlur = A.MotionBlur(blur_limit = 21, p = 1.0)
 # aug_dict['Perspective'] = A.Perspective(scale = 0.3, p = 1.0)
 # aug_dict['Solarize'] = A.Solarize(threshold = 192, p = 1)
+def Rand_HP(n):
+        def RandAugment(image, n = n, m = 10):
+        # Define a set of possible image transformations
+            transforms_list = [Rotation, 
+                            Flip,
+                            MotionBlur,
+                            Sharpen,
+                            CenterCrop,
+                            GaussNoise,
+                            GridDropout
+                            ]
+            # Apply a random sequence of n transformations with magnitude m
+            aug = A.Compose([transforms_list[i] for i in np.random.choice(len(transforms_list), n)])
+            aug_image = aug(image = image.astype(np.uint8))['image']
+            output = {}
+            output['image'] = aug_image
+            #FOR VISUALISATION
+            output['augs'] = [str(x).partition('(')[0] for x in aug]
+            return output
+        return RandAugment
 Perspective =  A.Perspective(scale = 0.3, p = 1.0)
+Solarize = A.Solarize(threshold = 192, p = 1)
 
-os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml  --cache --epochs 200 --run_name hp_lr_e3')
+# os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml  --cache --epochs 200 --run_name hp_lr_e3')
 # time.sleep(30)
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e4.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e4')
 # time.sleep(30)
@@ -62,12 +83,12 @@ os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e3.yaml  --cac
 # os.system('python3 train.py --data dataset_baseline.yaml --hyp lr_e6.yaml --weights yolov5s.pt --cache --epochs 100 --run_name hp_lr_e6')
 
 
-# create_augmented_images(augmentation = Normalize, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
-# os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Normalize'))
-# time.sleep(60)
-# create_augmented_images(augmentation = Flip, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = False)
-# os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Flip'))
-# time.sleep(60)
-# create_augmented_images(augmentation = Perspective, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = False)
-# os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 200 --run_name {}'.format('Perspective'))
-# time.sleep(60)
+create_augmented_images(augmentation = Rand_HP(2), olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 100 --run_name {}'.format('Randaug'))
+time.sleep(60)
+create_augmented_images(augmentation = Solarize, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 100 --run_name {}'.format('Solarize'))
+time.sleep(60)
+create_augmented_images(augmentation = MotionBlur, olddir = OLDDIR, newdir = NEWDIR, maskdir = MASKDIR, data_info_path = DATA_INFO, is_normalize = True)
+os.system('python3 train.py --data dataset.yaml --hyp custom_hyp.yaml --weights yolov5s.pt --cache --epochs 100 --run_name {}'.format('MotionBlur'))
+time.sleep(60)
